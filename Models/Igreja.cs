@@ -18,5 +18,7 @@ namespace SistemaGestaoCantinasIgrejas.Models
         [Required(ErrorMessage = "Campo endereço é obrigatório")]
         [Display(Name = "Endereço: ")]
         public string endereco { get; set; }
+
+        public ICollection<Evento> eventos { get; set; }
     }
 }

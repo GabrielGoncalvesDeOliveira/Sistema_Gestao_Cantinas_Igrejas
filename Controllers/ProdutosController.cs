@@ -45,6 +45,15 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // GET: Produtos/Create
         public IActionResult Create()
         {
+            var categoria = Enum.GetValues(typeof(Categoria)).Cast<Categoria>()
+                .Select(c => new SelectListItem
+                {
+                    Value = c.ToString(),
+                    Text = c.ToString()
+                });
+
+            ViewBag.bagCategoria = categoria;
+
             return View();
         }
 
@@ -77,6 +86,16 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
             {
                 return NotFound();
             }
+
+            var categoria = Enum.GetValues(typeof(Categoria)).Cast<Categoria>()
+                .Select(c => new SelectListItem
+                {
+                    Value = c.ToString(),
+                    Text = c.ToString()
+                });
+
+            ViewBag.bagCategoria = categoria;
+
             return View(produto);
         }
 

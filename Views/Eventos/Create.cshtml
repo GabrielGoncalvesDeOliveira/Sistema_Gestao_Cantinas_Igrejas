@@ -19,6 +19,13 @@
                 <span asp-validation-for="descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="igrejaid" class="control-label"></label>
+                <select asp-for="igrejaid" class="form-control" asp-items="ViewBag.igrejaid">
+                </select>
+                <!-- <input asp-for="igreja" class="form-control" /> -->
+                <span asp-validation-for="igreja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="endereco" class="control-label"></label>
                 <input asp-for="endereco" class="form-control" />
                 <span asp-validation-for="endereco" class="text-danger"></span>

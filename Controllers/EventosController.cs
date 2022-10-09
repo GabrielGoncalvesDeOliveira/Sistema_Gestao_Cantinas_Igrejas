@@ -21,7 +21,9 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // GET: Eventos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.evento.ToListAsync());
+            var contexto = _context.evento.Include(e => e.igreja);
+
+            return View(await contexto.ToListAsync());
         }
 
         // GET: Eventos/Details/5
@@ -45,6 +47,8 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // GET: Eventos/Create
         public IActionResult Create()
         {
+            ViewData["igrejaid"] = new SelectList(_context.igreja, "id", "denominacao");
+
             return View();
         }
 
@@ -53,7 +57,7 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,descricao,endereco,horario")] Evento evento)
+        public async Task<IActionResult> Create([Bind("id,descricao, igrejaid,endereco,horario")] Evento evento)
         {
             if (ModelState.IsValid)
             {

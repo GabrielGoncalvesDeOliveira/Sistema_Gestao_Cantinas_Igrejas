@@ -29,7 +29,7 @@ namespace SistemaGestaoCantinasIgrejas.Models
 
         [Required(ErrorMessage = "Campo valor é obrigatório")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
-        [Display(Name = "Valor: ")]
+        [Display(Name = "Valor unitário: ")]
         public float valor { get; set; }
 
         public bool disponivel { get; set; }
