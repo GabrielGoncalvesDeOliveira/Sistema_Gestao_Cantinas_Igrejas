@@ -45,7 +45,7 @@ Sistema Web com Asp.NET C# para gestão de cantinas em Igrejas
 	- Exclusão de uma venda.
   
 # Diagrama de Classes do projeto:
-![Sistema de Gestao de Cantinas de Igrejas](https://user-images.githubusercontent.com/87081079/194801214-cccc64cb-6459-4291-af32-9c44e5215b81.png)
+![Diagrama de Classes - Sistema de Gestao de Cantinas de Igrejas](https://user-images.githubusercontent.com/87081079/194801214-cccc64cb-6459-4291-af32-9c44e5215b81.png)
 
 # Link do Board do Trello utilizado para gestão desse projeto:
 ![Projeto no Trello](https://trello.com/b/PmseNeei/projeto-gest%C3%A3o-de-eventos-de-igrejas)
