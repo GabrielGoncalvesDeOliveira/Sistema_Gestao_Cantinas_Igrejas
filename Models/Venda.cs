@@ -12,13 +12,11 @@ namespace SistemaGestaoCantinasIgrejas.Models
         [Display(Name = "Id: ")]
         public int id { get; set; }
 
-        [Required(ErrorMessage = "Campo do participante é obrigatório")]
         [Display(Name = "Participante: ")]
         public Participante participante { get; set; }
         [Display(Name = "Participante: ")]
         public int participanteid { get; set; }
 
-        [Required(ErrorMessage = "Campo do produto é obrigatório")]
         [Display(Name = "Produto: ")]
         public Produto produto { get; set; }
         [Display(Name = "Produto: ")]
@@ -29,9 +27,8 @@ namespace SistemaGestaoCantinasIgrejas.Models
         [Display(Name = "Quantidade: ")]
         public float quantidade { get; set; }
 
-        [Required(ErrorMessage = "Campo valor é obrigatório")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
-        [Display(Name = "Valor: ")]
+        [Display(Name = "Valor unitário: ")]
         public float valor { get; set; }
 
         [Display(Name = "Data: ")]

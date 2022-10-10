@@ -21,7 +21,9 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // GET: Vendas
         public async Task<IActionResult> Index()
         {
-            var contexto = _context.venda.Include(v => v.participante).Include(v => v.produto);
+            var contexto = _context.venda
+                .Include(v => v.participante)
+                .Include(v => v.produto);
 
             return View(await contexto.ToListAsync());
         }
@@ -35,6 +37,8 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
             }
 
             var venda = await _context.venda
+                .Include(v => v.participante)
+                .Include(v => v.produto)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (venda == null)
             {
@@ -60,12 +64,35 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,participanteid,produtoid,quantidade,valor,data")] Venda venda)
         {
+            var produto = await _context.produto
+                .FirstOrDefaultAsync(p => p.id == venda.produtoid);
+
             if (ModelState.IsValid)
             {
-                _context.Add(venda);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (produto.quantidade >= venda.quantidade)
+                {
+                    float quantidadeFinal = produto.quantidade - venda.quantidade;
+                    produto.quantidade = quantidadeFinal;
+
+                    if (quantidadeFinal == 0)
+                    {
+                         produto.disponivel = false;
+                    }
+
+                    venda.produto = produto;
+
+                    _context.Add(venda);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View("venda_nao_realizada");
+                }
             }
+            ViewData["participanteid"] = new SelectList(_context.participante, "id", "nome");
+            ViewData["produtoid"] = new SelectList(_context.produto, "id", "descricao");
+
             return View(venda);
         }
 
@@ -82,6 +109,9 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
             {
                 return NotFound();
             }
+            ViewData["participanteid"] = new SelectList(_context.participante, "id", "nome");
+            ViewData["produtoid"] = new SelectList(_context.produto, "id", "descricao");
+
             return View(venda);
         }
 
@@ -117,6 +147,9 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["participanteid"] = new SelectList(_context.participante, "id", "nome");
+            ViewData["produtoid"] = new SelectList(_context.produto, "id", "descricao");
+
             return View(venda);
         }
 
@@ -129,6 +162,8 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
             }
 
             var venda = await _context.venda
+                .Include(v => v.participante)
+                .Include(v => v.produto)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (venda == null)
             {

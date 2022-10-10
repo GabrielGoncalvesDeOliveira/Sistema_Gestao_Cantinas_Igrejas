@@ -25,7 +25,7 @@ namespace SistemaGestaoCantinasIgrejas.Models
         [Required(ErrorMessage = "Campo quantidade é obrigatório")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
         [Display(Name = "Quantidade: ")]
-        public int quantidade { get; set; }
+        public float quantidade { get; set; }
 
         [Required(ErrorMessage = "Campo valor é obrigatório")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
