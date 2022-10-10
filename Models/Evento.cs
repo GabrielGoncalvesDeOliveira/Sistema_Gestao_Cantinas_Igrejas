@@ -15,7 +15,6 @@ namespace SistemaGestaoCantinasIgrejas.Models
         [Display(Name = "Descrição: ")]
         public string descricao { get; set; }
 
-        [Required(ErrorMessage = "Campo denominação da Igreja é obrigatório")]
         [Display(Name = "Igreja: ")]
         public Igreja igreja { get; set; }
         [Display(Name = "Igreja: ")]

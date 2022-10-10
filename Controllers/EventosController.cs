@@ -35,6 +35,7 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
             }
 
             var evento = await _context.evento
+                .Include(e => e.igreja)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (evento == null)
             {
@@ -57,7 +58,7 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,descricao, igrejaid,endereco,horario")] Evento evento)
+        public async Task<IActionResult> Create([Bind("id,descricao,igrejaid,endereco,horario")] Evento evento)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +66,7 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["igrejaid"] = new SelectList(_context.igreja, "id", "denominacao");
             return View(evento);
         }
 
@@ -81,6 +83,8 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
             {
                 return NotFound();
             }
+            ViewData["igrejaid"] = new SelectList(_context.igreja, "id", "denominacao");
+
             return View(evento);
         }
 
@@ -89,7 +93,7 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,endereco,horario")] Evento evento)
+        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,igrejaid,endereco,horario")] Evento evento)
         {
             if (id != evento.id)
             {
@@ -116,6 +120,8 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["igrejaid"] = new SelectList(_context.igreja, "id", "denominacao");
+
             return View(evento);
         }
 
@@ -128,6 +134,7 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
             }
 
             var evento = await _context.evento
+                .Include(evento => evento.igreja)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (evento == null)
             {

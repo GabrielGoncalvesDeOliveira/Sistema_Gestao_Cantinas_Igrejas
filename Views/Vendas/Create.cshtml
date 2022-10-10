@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Registrar nova</h1>
 
 <h4>Venda</h4>
 <hr />
@@ -14,14 +14,18 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="idParticipante" class="control-label"></label>
-                <input asp-for="idParticipante" class="form-control" />
-                <span asp-validation-for="idParticipante" class="text-danger"></span>
+                <label asp-for="participanteid" class="control-label"></label>
+                <select asp-for="participanteid" class="form-control" asp-items="ViewBag.participanteid">
+                    <option selected="selected" value="">Selecione um participante</option>
+                </select>
+                <span asp-validation-for="participante" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="idProduto" class="control-label"></label>
-                <input asp-for="idProduto" class="form-control" />
-                <span asp-validation-for="idProduto" class="text-danger"></span>
+                <label asp-for="produtoid" class="control-label"></label>
+                <select asp-for="produtoid" class="form-control" asp-items="ViewBag.produtoid">
+                    <option selected="selected" value="">Selecione um produto</option>
+                </select>
+                <span asp-validation-for="produto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="quantidade" class="control-label"></label>
@@ -39,14 +43,14 @@
                 <span asp-validation-for="data" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Registrar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retornar às vendas</a>
 </div>
 
 @section Scripts {

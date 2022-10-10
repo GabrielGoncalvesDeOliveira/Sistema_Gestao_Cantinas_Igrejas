@@ -21,7 +21,9 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // GET: Vendas
         public async Task<IActionResult> Index()
         {
-              return View(await _context.venda.ToListAsync());
+            var contexto = _context.venda.Include(v => v.participante).Include(v => v.produto);
+
+            return View(await contexto.ToListAsync());
         }
 
         // GET: Vendas/Details/5
@@ -45,6 +47,9 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // GET: Vendas/Create
         public IActionResult Create()
         {
+            ViewData["participanteid"] = new SelectList(_context.participante, "id", "nome");
+            ViewData["produtoid"] = new SelectList(_context.produto, "id", "descricao");
+
             return View();
         }
 
@@ -53,7 +58,7 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,idParticipante,idProduto,quantidade,valor,data")] Venda venda)
+        public async Task<IActionResult> Create([Bind("id,participanteid,produtoid,quantidade,valor,data")] Venda venda)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +90,7 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,idParticipante,idProduto,quantidade,valor,data")] Venda venda)
+        public async Task<IActionResult> Edit(int id, [Bind("id,participanteid,produtoid,quantidade,valor,data")] Venda venda)
         {
             if (id != venda.id)
             {

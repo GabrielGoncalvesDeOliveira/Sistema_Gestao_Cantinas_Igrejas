@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaGestaoCantinasIgrejas.Models;
 
@@ -11,9 +12,10 @@ using SistemaGestaoCantinasIgrejas.Models;
 namespace SistemaGestaoCantinasIgrejas.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20221010013025_eventoigreja")]
+    partial class eventoigreja
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,10 +144,10 @@ namespace SistemaGestaoCantinasIgrejas.Migrations
                     b.Property<DateTime>("data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("participanteid")
+                    b.Property<int>("idParticipante")
                         .HasColumnType("int");
 
-                    b.Property<int>("produtoid")
+                    b.Property<int>("idProduto")
                         .HasColumnType("int");
 
                     b.Property<float>("quantidade")
@@ -155,10 +157,6 @@ namespace SistemaGestaoCantinasIgrejas.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("id");
-
-                    b.HasIndex("participanteid");
-
-                    b.HasIndex("produtoid");
 
                     b.ToTable("Venda");
                 });
@@ -172,25 +170,6 @@ namespace SistemaGestaoCantinasIgrejas.Migrations
                         .IsRequired();
 
                     b.Navigation("igreja");
-                });
-
-            modelBuilder.Entity("SistemaGestaoCantinasIgrejas.Models.Venda", b =>
-                {
-                    b.HasOne("SistemaGestaoCantinasIgrejas.Models.Participante", "participante")
-                        .WithMany()
-                        .HasForeignKey("participanteid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SistemaGestaoCantinasIgrejas.Models.Produto", "produto")
-                        .WithMany()
-                        .HasForeignKey("produtoid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("participante");
-
-                    b.Navigation("produto");
                 });
 
             modelBuilder.Entity("SistemaGestaoCantinasIgrejas.Models.Igreja", b =>

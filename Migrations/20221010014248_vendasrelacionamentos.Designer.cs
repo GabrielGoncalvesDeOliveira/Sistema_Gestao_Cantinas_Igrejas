@@ -12,8 +12,8 @@ using SistemaGestaoCantinasIgrejas.Models;
 namespace SistemaGestaoCantinasIgrejas.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20221009191407_contexto")]
-    partial class contexto
+    [Migration("20221010014248_vendasrelacionamentos")]
+    partial class vendasrelacionamentos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,7 +44,12 @@ namespace SistemaGestaoCantinasIgrejas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("igrejaid")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("igrejaid");
 
                     b.ToTable("Evento");
                 });
@@ -139,10 +144,10 @@ namespace SistemaGestaoCantinasIgrejas.Migrations
                     b.Property<DateTime>("data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("idParticipante")
+                    b.Property<int>("participanteid")
                         .HasColumnType("int");
 
-                    b.Property<int>("idProduto")
+                    b.Property<int>("produtoid")
                         .HasColumnType("int");
 
                     b.Property<float>("quantidade")
@@ -153,7 +158,46 @@ namespace SistemaGestaoCantinasIgrejas.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("participanteid");
+
+                    b.HasIndex("produtoid");
+
                     b.ToTable("Venda");
+                });
+
+            modelBuilder.Entity("SistemaGestaoCantinasIgrejas.Models.Evento", b =>
+                {
+                    b.HasOne("SistemaGestaoCantinasIgrejas.Models.Igreja", "igreja")
+                        .WithMany("eventos")
+                        .HasForeignKey("igrejaid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("igreja");
+                });
+
+            modelBuilder.Entity("SistemaGestaoCantinasIgrejas.Models.Venda", b =>
+                {
+                    b.HasOne("SistemaGestaoCantinasIgrejas.Models.Participante", "participante")
+                        .WithMany()
+                        .HasForeignKey("participanteid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaGestaoCantinasIgrejas.Models.Produto", "produto")
+                        .WithMany()
+                        .HasForeignKey("produtoid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("participante");
+
+                    b.Navigation("produto");
+                });
+
+            modelBuilder.Entity("SistemaGestaoCantinasIgrejas.Models.Igreja", b =>
+                {
+                    b.Navigation("eventos");
                 });
 #pragma warning restore 612, 618
         }

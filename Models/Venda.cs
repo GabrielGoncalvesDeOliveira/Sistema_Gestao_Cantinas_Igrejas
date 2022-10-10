@@ -12,13 +12,17 @@ namespace SistemaGestaoCantinasIgrejas.Models
         [Display(Name = "Id: ")]
         public int id { get; set; }
 
-        [Required(ErrorMessage = "Campo id do participante é obrigatório")]
-        [Display(Name = "Id Participante: ")]
-        public int idParticipante { get; set; }
+        [Required(ErrorMessage = "Campo do participante é obrigatório")]
+        [Display(Name = "Participante: ")]
+        public Participante participante { get; set; }
+        [Display(Name = "Participante: ")]
+        public int participanteid { get; set; }
 
-        [Required(ErrorMessage = "Campo id do produto é obrigatório")]
-        [Display(Name = "Id Produto: ")]
-        public int idProduto { get; set; }
+        [Required(ErrorMessage = "Campo do produto é obrigatório")]
+        [Display(Name = "Produto: ")]
+        public Produto produto { get; set; }
+        [Display(Name = "Produto: ")]
+        public int produtoid { get; set; }
 
         [Required(ErrorMessage = "Campo quantidade é obrigatório")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
