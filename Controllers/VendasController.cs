@@ -96,63 +96,6 @@ namespace SistemaGestaoCantinasIgrejas.Controllers
             return View(venda);
         }
 
-        // GET: Vendas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.venda == null)
-            {
-                return NotFound();
-            }
-
-            var venda = await _context.venda.FindAsync(id);
-            if (venda == null)
-            {
-                return NotFound();
-            }
-            ViewData["participanteid"] = new SelectList(_context.participante, "id", "nome");
-            ViewData["produtoid"] = new SelectList(_context.produto, "id", "descricao");
-
-            return View(venda);
-        }
-
-        // POST: Vendas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,participanteid,produtoid,quantidade,valor,data")] Venda venda)
-        {
-            if (id != venda.id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(venda);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!VendaExists(venda.id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["participanteid"] = new SelectList(_context.participante, "id", "nome");
-            ViewData["produtoid"] = new SelectList(_context.produto, "id", "descricao");
-
-            return View(venda);
-        }
-
         // GET: Vendas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
