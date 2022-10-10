@@ -1,5 +1,5 @@
 # Sistema de Gestao de Cantinas de Igrejas
-Sistema Web com Asp.NET C# para gestão de cantinas em Igrejas
+	- Sistema Web com Asp.NET C# para gestão de cantinas em Igrejas
 
 # Escopo do Projeto:
 
@@ -48,7 +48,7 @@ Sistema Web com Asp.NET C# para gestão de cantinas em Igrejas
 ![Diagrama de Classes - Sistema de Gestao de Cantinas de Igrejas](https://user-images.githubusercontent.com/87081079/194801214-cccc64cb-6459-4291-af32-9c44e5215b81.png)
 
 # Link do Board do Trello utilizado para gestão desse projeto:
-![Projeto no Trello](https://trello.com/b/PmseNeei/projeto-gest%C3%A3o-de-eventos-de-igrejas)
+-[Projeto no Trello](https://trello.com/b/PmseNeei/projeto-gest%C3%A3o-de-eventos-de-igrejas)
 
 # Link do repositório aqui no github com o Sistema de Gestão de Igrejas Evangélicas feito em PHP no semestre passado:
 ![Sistema de Gestão de Igrejas em PHP no Github](https://github.com/GabrielGoncalvesDeOliveira/sistema_gestao_igrejas_php)
