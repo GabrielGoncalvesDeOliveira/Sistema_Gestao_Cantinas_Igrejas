@@ -24,8 +24,8 @@ namespace SistemaGestaoCantinasIgrejas.Models
         [Display(Name = "Endereço: ")]
         public string endereco { get; set; }
 
-        [Required(ErrorMessage = "Campo horario é obrigatório")]
-        [Display(Name = "Horario: ")]
-        public string horario { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [Display(Name = "Data: ")]
+        public DateTime horario { get; set; }
     }
 }
