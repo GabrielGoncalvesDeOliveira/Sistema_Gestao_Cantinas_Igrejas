@@ -1,4 +1,4 @@
-namespace SistemaGestaoCantinasIgrejas.Models
+namespace SGCI.Models
 {
     public class ErrorViewModel
     {

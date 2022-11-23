@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SistemaGestaoCantinasIgrejas.Models;
+using SGCI.Models;
 using System.Diagnostics;
 
-namespace SistemaGestaoCantinasIgrejas.Controllers
+namespace SGCI.Controllers
 {
     public class HomeController : Controller
     {
